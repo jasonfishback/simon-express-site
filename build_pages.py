@@ -122,7 +122,7 @@ CAREERS_FAQ_SCHEMA = '''
     {
       "@type": "Question",
       "name": "Is Simon Express a good company to drive for?",
-      "acceptedAnswer": { "@type": "Answer", "text": "Simon Express is a family-run national refrigerated carrier hiring Class A CDL drivers nationwide, driver-nominated for Best Fleets to Drive For every year from 2022 through 2026. Drivers get late-model Freightliner Cascadia tractors, consistent reefer freight year-round, top-tier mileage pay, full benefits with 401(k) match, paid orientation, referral bonuses, and real home time. Dispatch is human-staffed 24/7 \u2014 drivers reach a real person, not a phone tree." }
+      "acceptedAnswer": { "@type": "Answer", "text": "Simon Express is a family-run national refrigerated carrier hiring Class A CDL drivers nationwide, driver-nominated for Best Fleets to Drive For every year from 2022 through 2026. Drivers get late-model Freightliner Cascadia tractors, consistent reefer freight year-round, top-tier mileage pay, full benefits with 401(k) match, paid orientation, referral bonuses, and real home time. Dispatch is available 24/7 \u2014 drivers reach a real person, not a phone tree." }
     },
     {
       "@type": "Question",
@@ -431,8 +431,8 @@ ABOUT_BODY = f'''
 <section class="page-header">
   <div class="wrap reveal">
     <div class="crumbs"><a href="/">Home</a><span>/</span>About</div>
-    <h1>Three generations.<br/><span class="accent">One last name.</span></h1>
-    <p>Simon Express is a national refrigerated carrier with a family business at its core — same family, same surname, four generations on the floor. We've been hauling food across America for over fifty years.</p>
+    <h1>Four generations.<br/><span class="accent">One last name.</span></h1>
+    <p>Simon Express is a national refrigerated carrier with a family business at its core — same family, same surname, four generations on the floor. The Simon family has been moving freight across America since 1955.</p>
   </div>
 </section>
 
@@ -443,15 +443,17 @@ ABOUT_BODY = f'''
         <div class="kicker">OUR STORY</div>
       </div>
       <div>
-        <p style="font-size:20px;line-height:1.55;color:var(--ink);margin-bottom:24px;">
-          The Simon family has been moving food across America for four generations on the floor. What started with a single truck has grown into a 48-state refrigerated carrier running lanes coast to coast — but the way we operate hasn't changed. Family answers the phone. Family runs dispatch. Family signs the paychecks.
-        </p>
-        <p style="font-size:16px;line-height:1.7;color:var(--mute);margin-bottom:18px;">
-          We're not the biggest carrier in the country. We don't want to be. We're the carrier you call when you need someone who'll pick up the phone at 2am, when the receiver's giving your driver a hard time, when the weather's against you in Wyoming and the load needs to be in Dallas in eighteen hours. The carrier that hits the dock and hands you a clean temperature log. The carrier whose drivers know what they're hauling and treat it like it's their own.
-        </p>
-        <p style="font-size:16px;line-height:1.7;color:var(--mute);">
-          Three generations of doing one thing. We're not changing the model.
-        </p>
+        <div class="story-card">
+          <p class="story-lede">
+            The Simon family has been moving freight across America for four generations on the floor. What started in 1955 with a single 2-ton tractor has grown into a 48-state refrigerated operation running lanes coast to coast — but the way we run hasn't changed. Family answers the phone. Family runs dispatch. Family signs the paychecks.
+          </p>
+          <p class="story-body">
+            We're not the biggest carrier in the country. We don't want to be. We're the carrier you call when you need someone who'll pick up the phone at 2am, when the receiver's giving your driver a hard time, when the weather's against you in Wyoming and the load needs to be in Dallas in eighteen hours. The carrier that hits the dock and hands you a clean temperature log. The carrier whose drivers know what they're hauling and treat it like it's their own.
+          </p>
+          <p class="story-coda">
+            Four generations of doing one thing. We're not changing the model.
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -464,31 +466,45 @@ ABOUT_BODY = f'''
     <div class="kicker reveal" style="margin-bottom:32px;">THE TIMELINE</div>
     <div class="timeline">
       <div class="item reveal">
-        <div class="year">1970s</div>
+        <div class="year">1955</div>
         <div>
-          <h3>The first truck.</h3>
-          <p>The Simon family bought its first refrigerated tractor and started hauling produce. One truck, one driver, one Carrier reefer unit, and a phone book full of customers who needed someone reliable.</p>
+          <h3>Dick Simon's first truck.</h3>
+          <p>Dick Simon traded his new car for a 2-ton tractor and a 32-foot trailer. His first trip: hauling feed from Provo to ranchers in southern California, returning with a load of fish meal from Long Beach. One man, one truck, the start of everything.</p>
         </div>
       </div>
       <div class="item reveal">
-        <div class="year">1990s</div>
+        <div class="year">1972</div>
         <div>
-          <h3>The second generation.</h3>
-          <p>The kids who grew up around the trucks came back from college and grew the operation. New tractors, new lanes east of the Mississippi and west to the coast, the first dedicated dairy and protein customers we still serve today.</p>
+          <h3>Dick Simon Trucking is born.</h3>
+          <p>After years of driving nonstop, Dick incorporated as Dick Simon Trucking, Inc. — ending the sole proprietorship and laying the foundation for a Simon family business that would span generations.</p>
         </div>
       </div>
       <div class="item reveal">
-        <div class="year">2010s</div>
+        <div class="year">1980</div>
         <div>
-          <h3>48-state coverage.</h3>
-          <p>Modern telematics, ELD compliance ahead of the deadline, and lanes from Seattle to Miami, Boston to San Diego. The reefer fleet expanded into multi-temp dual-zone trailers. The cold chain got tighter. So did our on-time numbers.</p>
+          <h3>The second generation joins.</h3>
+          <p>Dick Simon Trucking was running over 25 tractors and growing fast. Dick's son Kelle Simon began working alongside his father — the start of the second generation in the business, learning the trade the same way Dick did: by being there every day.</p>
+        </div>
+      </div>
+      <div class="item reveal">
+        <div class="year">2002</div>
+        <div>
+          <h3>Kelles Transport Service founded.</h3>
+          <p>After Dick Simon retired, Kelle Simon founded Kelles Transport Service — carrying the Simon family's operating principles into a new chapter and laying the groundwork for the next generation to step in.</p>
+        </div>
+      </div>
+      <div class="item reveal">
+        <div class="year">2018</div>
+        <div>
+          <h3>Simon Express founded.</h3>
+          <p>The third generation stepped up. TeJay and Chas Simon — Kelle's sons, Dick's grandsons — founded Simon Express, carrying the family's name into a new chapter. Soon after, they brought on their lifelong best friend — someone they'd known since elementary school, who had already worked for the Simon family for nearly 30 years — to help run the operations. Same family principle, just a new generation behind the wheel.</p>
         </div>
       </div>
       <div class="item reveal">
         <div class="year">Today</div>
         <div>
           <h3>The fourth generation.</h3>
-          <p>The next Simons are on the floor — running dispatch, walking the yard, learning the business the same way the previous generations did. The trucks are newer, the technology is sharper, the family is the same.</p>
+          <p>Today, three of TeJay's sons work at Simon Express — the fourth generation of the Simon family on the floor. TeJay and Chas's brother is part of the team too. Simon Express is a national refrigerated carrier serving 48 states, hauling food-grade freight coast to coast. The trucks are newer, the technology is sharper, the family is the same — running dispatch, walking the yard, picking up the phone at 2 a.m. With the same commitment Dick Simon started with seventy years ago: show up, run hard, and treat people right.</p>
         </div>
       </div>
     </div>
@@ -512,8 +528,8 @@ ABOUT_BODY = f'''
       </div>
       <div class="cell">
         <div class="num">02</div>
-        <h3>The Phone.</h3>
-        <p>Dispatch is staffed 24/7 by humans, not phone trees. You call our number, a person picks up. Drivers can reach a real dispatcher anytime — and so can you, the customer.</p>
+        <h3>The Drivers.</h3>
+        <p>Family-run means we treat drivers like family. Drivers nominated us for Best Fleets to Drive For five years running, 2022 to 2026. We know everyone by name. We pick up when they call. And we run hard for the people running our equipment.</p>
       </div>
       <div class="cell">
         <div class="num">03</div>
@@ -556,7 +572,7 @@ ABOUT_BODY = f'''
   <div class="inner reveal">
     <div>
       <div class="kicker" style="color:#fff;">WORK WITH FAMILY</div>
-      <h2 style="margin-top:14px;">Three generations.<br/><span class="accent">One handshake.</span></h2>
+      <h2 style="margin-top:14px;">Four generations.<br/><span class="accent">One handshake.</span></h2>
     </div>
     <div class="actions">
       <button type="button" class="btn btn-xl" data-open-quote>Get a Quote {ARROW_SVG}</button>
@@ -569,7 +585,7 @@ ABOUT_BODY = f'''
 render(
     "about.html",
     title="About — Three Generations of Family Trucking · Simon Express",
-    description="Simon Express is a national refrigerated trucking carrier run by four generations of the Simon family on the floor. Over 50 years hauling food freight across 48 states.",
+    description="Simon Express is a national refrigerated trucking carrier run by four generations of the Simon family on the floor. The Simon family has been moving freight across America since 1955.",
     canonical="about.html",
     body=ABOUT_BODY,
     extra_schema=ABOUT_SCHEMA,
@@ -694,7 +710,7 @@ CAREERS_BODY = f'''
     <div class="faq-grid reveal-stagger">
       <details class="faq-item">
         <summary><h3>Is Simon Express a good company to drive for?</h3><span class="faq-toggle" aria-hidden="true">+</span></summary>
-        <p>Family-run national refrigerated carrier, driver-nominated for Best Fleets to Drive For five years running (2022&ndash;2026). Late-model Freightliner Cascadia tractors, consistent reefer freight year-round, top-tier mileage pay, full benefits with 401(k) match, paid orientation, referral bonuses, and real home time. Dispatch is human-staffed 24/7 &mdash; you reach a person, not a phone tree.</p>
+        <p>Family-run national refrigerated carrier, driver-nominated for Best Fleets to Drive For five years running (2022&ndash;2026). Late-model Freightliner Cascadia tractors, consistent reefer freight year-round, top-tier mileage pay, full benefits with 401(k) match, paid orientation, referral bonuses, and real home time. Dispatch is available 24/7 &mdash; you reach a person, not a phone tree.</p>
       </details>
       <details class="faq-item">
         <summary><h3>How much do Simon Express drivers make?</h3><span class="faq-toggle" aria-hidden="true">+</span></summary>

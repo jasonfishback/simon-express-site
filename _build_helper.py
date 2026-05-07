@@ -48,7 +48,7 @@ BASE_SCHEMA = '''
       "@id": "https://www.simonexpress.com/#org",
       "name": "Simon Express",
       "alternateName": ["Simon Express Trucking", "Simon Express Refrigerated"],
-      "description": "National refrigerated trucking carrier serving 48 states. Simon Express operates a fleet of 53-foot temperature-controlled reefer trailers hauling food-grade freight \u2014 produce, dairy, protein, frozen, and beverage \u2014 over the road for shippers nationwide. Run by four generations of the Simon family on the floor, with over 50 years of refrigerated transportation experience.",
+      "description": "National refrigerated trucking carrier serving 48 states. Simon Express operates a fleet of 53-foot temperature-controlled reefer trailers hauling food-grade freight \u2014 produce, dairy, protein, frozen, and beverage \u2014 over the road for shippers nationwide. Run by four generations of the Simon family on the floor, with over 70 years of family experience in trucking.",
       "url": "https://www.simonexpress.com/",
       "logo": "https://www.simonexpress.com/assets/simon-logo-cropped.png",
       "image": "https://www.simonexpress.com/assets/truck-arch.jpg",

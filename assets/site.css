@@ -416,6 +416,54 @@ a { color: inherit; text-decoration: none; }
   max-width: none;
 }
 
+/* Story card — about page "Our Story" narrative */
+.story-card {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--paper) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 40px 48px;
+  box-shadow: var(--sh-md);
+  position: relative;
+}
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 40px; right: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--red), transparent);
+  opacity: 0.6;
+  border-radius: var(--r-pill);
+}
+.story-card .story-lede {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+.story-card .story-body {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--mute);
+}
+.story-card .story-coda {
+  margin-top: 18px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--mute);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .story-card { padding: 28px 24px; }
+  .story-card::before { left: 24px; right: 24px; }
+  .story-card .story-lede { font-size: 17px; line-height: 1.55; }
+  .story-card .story-body,
+  .story-card .story-coda { font-size: 15px; line-height: 1.6; }
+}
+
 /* Page-header (smaller, for sub-pages) */
 .page-header {
   background: var(--paper);
@@ -654,11 +702,14 @@ a { color: inherit; text-decoration: none; }
 .rule-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
 .rule-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
 .rule-grid > .cell {
-  background: var(--white);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--paper) 100%);
   padding: 32px 28px;
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
-  box-shadow: var(--sh-sm);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.8) inset,
+    0 1px 3px rgba(11,11,12,0.06),
+    0 4px 12px rgba(11,11,12,0.08);
   display: flex; flex-direction: column;
   transition:
     transform var(--t-base) var(--ease),
@@ -667,7 +718,10 @@ a { color: inherit; text-decoration: none; }
 }
 .rule-grid > .cell:hover {
   transform: translateY(-3px);
-  box-shadow: var(--sh-lg);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 4px 10px rgba(11,11,12,0.10),
+    0 14px 32px rgba(11,11,12,0.14);
   border-color: rgba(11,11,12,0.12);
 }
 .dark-section .rule-grid > .cell {
