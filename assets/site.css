@@ -70,8 +70,10 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
   line-height: 1.5;
+  overflow-x: hidden;
+  width: 100%;
 }
-img, svg { display: block; max-width: 100%; }
+img, svg { display: block; max-width: 100%; height: auto; }
 button, input, textarea, select { font-family: inherit; font-size: inherit; }
 button { cursor: pointer; }
 h1, h2, h3, h4, h5, p, ul, ol, blockquote { margin: 0; padding: 0; }
@@ -1796,8 +1798,30 @@ a { color: inherit; text-decoration: none; }
   .section, .section-lg { padding: 56px 0; }
   .hero-band { padding: 36px 0 48px; }
 
-  /* Hero card scales down */
-  .hero-card { padding: 22px 24px; }
+  /* Hero card — mobile gets more visual weight: frosted glass, deeper shadow, stronger accent */
+  .hero-card {
+    padding: 26px 24px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.92) 0%, rgba(248,249,250,0.88) 100%);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(11,11,12,0.10);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.9) inset,
+      0 2px 6px rgba(11,11,12,0.06),
+      0 12px 28px rgba(11,11,12,0.12),
+      0 24px 48px rgba(11,11,12,0.10);
+    position: relative;
+  }
+  .hero-card::before {
+    /* Stronger accent rule on mobile */
+    top: 0;
+    left: 24px;
+    right: 24px;
+    height: 3px;
+    opacity: 0.85;
+    box-shadow: 0 4px 14px rgba(215,25,32,0.35);
+  }
   .hero-card .hero-lede { font-size: 15px; line-height: 1.55; }
   .hero-card .hero-sublede { font-size: 13px; line-height: 1.5; padding-top: 14px; margin-top: 14px; }
 
@@ -1873,9 +1897,28 @@ a { color: inherit; text-decoration: none; }
   .customer-strip .row { grid-template-columns: repeat(2, 1fr); gap: 18px; }
   .customer-strip .item { font-size: 14px; }
 
-  /* Footer */
-  .footer .grid { grid-template-columns: 1fr; gap: 28px; }
-  .footer .brand { grid-column: auto; }
+  /* Footer — compact for mobile */
+  .footer { padding: 36px 0 20px; }
+  .footer .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 20px;
+    column-gap: 20px;
+  }
+  .footer .brand {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+  .footer .brand img { height: 56px; margin-bottom: 12px; }
+  .footer .brand p { font-size: 13px; line-height: 1.5; max-width: 100%; }
+  .footer .col h4 { font-size: 12px; margin-bottom: 12px; letter-spacing: 0.18em; }
+  .footer .col ul { gap: 8px; }
+  .footer .col li { font-size: 13px; line-height: 1.4; }
+  .footer .bottom {
+    margin-top: 24px;
+    padding-top: 16px;
+    font-size: 11px;
+    gap: 8px;
+  }
 
   /* Phone mockup smaller on phone screens (meta!) */
   .phone { width: 280px; height: 560px; border-radius: 38px; }
