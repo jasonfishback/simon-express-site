@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 180" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Simon Express — Salt Lake City, Utah">
+  <defs>
+    <style>
+      .simon-text {
+        font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+        font-weight: 700;
+        font-size: 92px;
+        letter-spacing: 0.02em;
+        fill: none;
+        stroke: #ffffff;
+        stroke-width: 3.5;
+        paint-order: stroke fill;
+      }
+      .express-text {
+        font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 86px;
+        fill: #D71920;
+      }
+      .city-text {
+        font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+        font-style: italic;
+        font-weight: 400;
+        font-size: 26px;
+        fill: #ffffff;
+        letter-spacing: 0.03em;
+      }
+    </style>
+  </defs>
+
+  <text x="0" y="100" class="simon-text">SIMON</text>
+  <text x="270" y="100" class="express-text">Express</text>
+  <text x="170" y="150" class="city-text" text-anchor="middle">Salt Lake City, Utah</text>
+</svg>
