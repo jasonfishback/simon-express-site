@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /driver-login
+Disallow: /driver-login.html
+
+Sitemap: https://www.simonexpress.com/sitemap.xml
