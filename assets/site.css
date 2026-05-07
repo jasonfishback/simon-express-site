@@ -232,6 +232,42 @@ a { color: inherit; text-decoration: none; }
 .nav-toggle[aria-expanded="true"] span::before { transform: translateY(6px) rotate(45deg); }
 .nav-toggle[aria-expanded="true"] span::after  { transform: translateY(-6px) rotate(-45deg); }
 
+/* --- MOBILE ACTION BAR — hidden on desktop, shows below nav on mobile --- */
+.mobile-actions {
+  display: none;
+}
+.mobile-actions .mobile-cta {
+  flex: 1 1 0;
+  justify-content: center;
+  padding: 13px 14px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: var(--r-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-actions .mobile-cta svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.mobile-actions .mobile-cta-call {
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--paper) 100%);
+  color: var(--ink);
+  border: 1px solid rgba(11,11,12,0.10);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.9) inset,
+    0 2px 4px rgba(11,11,12,0.06),
+    0 6px 14px rgba(11,11,12,0.08);
+  text-decoration: none;
+}
+.mobile-actions .mobile-cta-call:hover {
+  background: linear-gradient(180deg, #FFFFFF 0%, #F2F4F6 100%);
+}
+
 /* --- BUTTONS — modern pill, soft shadow, subtle gradient depth --- */
 .btn {
   display: inline-flex; align-items: center; gap: 10px;
@@ -1713,10 +1749,11 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 980px) {
   /* Nav becomes hamburger */
   .nav .links { display: none; }
-  .nav .ctas .btn:not(.btn-primary) { display: none; }
+  /* Hide all in-nav buttons on mobile (Apply + Get a Quote) — handled by mobile-actions bar below */
+  .nav .ctas .btn { display: none; }
   .nav-toggle { display: inline-flex; }
-  .nav .wrap { min-height: 72px; padding-top: 12px; padding-bottom: 12px; }
-  .nav .brand img { height: 60px; }
+  .nav .wrap { min-height: 84px; padding-top: 14px; padding-bottom: 14px; }
+  .nav .brand img { height: 76px; }
   .nav.is-open .links {
     display: flex; position: absolute; top: 100%; left: 0; right: 0;
     background: rgba(255,255,255,0.96);
@@ -1727,6 +1764,33 @@ a { color: inherit; text-decoration: none; }
     box-shadow: var(--sh-lg);
   }
   .nav.is-open .links a { padding: 14px var(--gutter); width: 100%; }
+
+  /* Hamburger button — bigger and more obvious on mobile */
+  .nav-toggle {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(180deg, #FFFFFF 0%, var(--paper) 100%);
+    border: 1px solid rgba(11,11,12,0.12);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.9) inset,
+      0 2px 4px rgba(11,11,12,0.06),
+      0 4px 10px rgba(11,11,12,0.08);
+  }
+  .nav-toggle span,
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    width: 22px;
+    height: 2.5px;
+  }
+
+  /* Mobile-only action bar with Get a Quote + Call buttons */
+  .mobile-actions {
+    display: flex;
+    gap: 10px;
+    padding: 12px var(--gutter) 14px;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+  }
 
   /* Split hero stacks */
   .split-hero { grid-template-columns: 1fr; min-height: auto; }
@@ -1835,10 +1899,64 @@ a { color: inherit; text-decoration: none; }
   /* Split hero padding */
   .split-hero > div { padding: 40px 24px; min-height: 440px; }
   .split-hero h2 { line-height: 1.0; }
-  .split-hero .actions { gap: 12px; }
-  .split-hero .actions .btn { width: 100%; justify-content: center; }
-  .split-hero .stats-row { gap: 16px; }
-  .split-hero .stats-row .stat-num { font-size: 28px; }
+
+  /* Stats row — 3-col grid of opaque cards, number on top + label centered below */
+  .split-hero .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 28px 0 24px;
+    flex-wrap: nowrap;
+  }
+  .split-hero .stat {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(11, 11, 12, 0.10);
+    border-radius: var(--r-md);
+    padding: 14px 6px 12px;
+    text-align: center;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.9) inset,
+      0 2px 6px rgba(11, 11, 12, 0.08),
+      0 6px 14px rgba(11, 11, 12, 0.06);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .split-hero .stat .big {
+    font-size: 26px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .split-hero .stat .big.text-stat {
+    font-size: 18px;
+  }
+  .split-hero .stat .small {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    margin-top: 6px;
+    color: var(--mute-2);
+    text-align: center;
+  }
+  /* Driver side gets dark cards instead of white */
+  .split-hero .driver .stat {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  .split-hero .driver .stat .big { color: #fff; }
+  .split-hero .driver .stat .small { color: var(--mute-3); }
+
+  /* Action buttons — centered, full width */
+  .split-hero .actions {
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+  }
+  .split-hero .actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 
   /* Forms */
   .form-card { padding: 28px 20px; border-radius: var(--r-lg); }
@@ -1956,6 +2074,9 @@ a { color: inherit; text-decoration: none; }
   .bf-badge .bf-program { font-size: 14px; }
   .bf-badge .bf-laurel svg { width: 24px; height: 24px; }
   .phone { width: 260px; height: 520px; }
-  .nav .brand img { height: 52px; }
-  .nav .wrap { min-height: 64px; }
+  .nav .brand img { height: 64px; }
+  .nav .wrap { min-height: 76px; }
+  .mobile-actions { padding: 10px var(--gutter) 12px; gap: 8px; }
+  .mobile-actions .mobile-cta { padding: 12px 10px; font-size: 12px; gap: 6px; }
+  .mobile-actions .mobile-cta svg { width: 13px; height: 13px; }
 }
