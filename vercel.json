@@ -59,6 +59,26 @@
       "source": "/about.html",
       "destination": "/about",
       "permanent": true
+    },
+    {
+      "source": "/drive",
+      "destination": "/careers",
+      "permanent": true
+    },
+    {
+      "source": "/drive.html",
+      "destination": "/careers",
+      "permanent": true
+    },
+    {
+      "source": "/jobs",
+      "destination": "/careers",
+      "permanent": true
+    },
+    {
+      "source": "/employment",
+      "destination": "/careers",
+      "permanent": true
     }
   ],
   "rewrites": [
