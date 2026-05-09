@@ -50,6 +50,10 @@
     {
       "source": "/unsubscribe/:token",
       "destination": "https://kpi.simonexpress.com/api/recruiting/unsubscribe/:token"
+    },
+    {
+      "source": "/api/recruiting/unsubscribe/:token",
+      "destination": "https://kpi.simonexpress.com/api/recruiting/unsubscribe/:token"
     }
   ]
 }
