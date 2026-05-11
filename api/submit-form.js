@@ -40,6 +40,60 @@ function getClientIp(req) {
   return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
 }
 
+function getGeoFromVercel(req) {
+  const h = req.headers;
+  const city = h['x-vercel-ip-city'] ? decodeURIComponent(h['x-vercel-ip-city']) : null;
+  return {
+    country:   h['x-vercel-ip-country']         || null,
+    region:    h['x-vercel-ip-country-region']  || null,
+    city:      city,
+    latitude:  h['x-vercel-ip-latitude']        || null,
+    longitude: h['x-vercel-ip-longitude']       || null,
+    timezone:  h['x-vercel-ip-timezone']        || null,
+  };
+}
+
+function parseUserAgent(ua) {
+  if (!ua) return { device: 'Unknown', os: 'Unknown', browser: 'Unknown' };
+  let device = 'Desktop';
+  if (/iPad|Tablet/i.test(ua)) device = 'Tablet';
+  else if (/Mobi|Android.*Mobile|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua)) device = 'Mobile';
+  else if (/bot|crawler|spider|crawling|curl|wget|python-requests|node-fetch|HeadlessChrome|PhantomJS/i.test(ua)) device = 'Bot/Script';
+  let os = 'Unknown';
+  if (/Windows NT 10/.test(ua)) os = 'Windows 10/11';
+  else if (/Windows NT 6\.3/.test(ua)) os = 'Windows 8.1';
+  else if (/Windows NT 6\.1/.test(ua)) os = 'Windows 7';
+  else if (/Windows/.test(ua)) os = 'Windows';
+  else if (/iPhone OS (\d+_\d+)/.test(ua)) os = 'iOS ' + RegExp.$1.replace('_', '.');
+  else if (/iPad.*OS (\d+_\d+)/.test(ua)) os = 'iPadOS ' + RegExp.$1.replace('_', '.');
+  else if (/Mac OS X (\d+[._]\d+)/.test(ua)) os = 'macOS ' + RegExp.$1.replace('_', '.');
+  else if (/Android (\d+\.?\d*)/.test(ua)) os = 'Android ' + RegExp.$1;
+  else if (/CrOS/.test(ua)) os = 'ChromeOS';
+  else if (/Linux/.test(ua)) os = 'Linux';
+  let browser = 'Unknown';
+  if (/Edg\/(\d+)/.test(ua)) browser = 'Edge ' + RegExp.$1;
+  else if (/OPR\/(\d+)/.test(ua)) browser = 'Opera ' + RegExp.$1;
+  else if (/Firefox\/(\d+)/.test(ua)) browser = 'Firefox ' + RegExp.$1;
+  else if (/Chrome\/(\d+)/.test(ua) && !/Edg|OPR/.test(ua)) browser = 'Chrome ' + RegExp.$1;
+  else if (/Safari\/(\d+)/.test(ua) && /Version\/(\d+)/.test(ua)) browser = 'Safari ' + RegExp.$1;
+  else if (/curl/i.test(ua)) browser = 'curl';
+  return { device, os, browser };
+}
+
+function buildMetaBlock(req) {
+  const ip = getClientIp(req);
+  const geo = getGeoFromVercel(req);
+  const ua = req.headers['user-agent'] || '';
+  const parsed = parseUserAgent(ua);
+  const locationParts = [geo.city, geo.region, geo.country].filter(Boolean);
+  const location = locationParts.length ? locationParts.join(', ') : 'Unknown';
+  const mapLink = (geo.latitude && geo.longitude)
+    ? 'https://www.google.com/maps?q=' + geo.latitude + ',' + geo.longitude
+    : null;
+  return { ip, location, timezone: geo.timezone || 'Unknown', device: parsed.device, os: parsed.os, browser: parsed.browser, mapLink, rawUserAgent: ua.slice(0, 200) };
+}
+
+
 function normalizeEmail(email) {
   if (!email || typeof email !== 'string') return '';
   const lower = email.trim().toLowerCase();
@@ -288,7 +342,7 @@ module.exports = async (req, res) => {
   // LAYER 5: Accept and send
   // -------------------------------------------------------------------------
   try {
-    const emailHtml = buildEmailHtml(formType, body);
+    const meta = buildMetaBlock(req); const emailHtml = buildEmailHtml(formType, body, meta);
     const emailSubject = buildEmailSubject(formType, body);
 
     await resend.emails.send({
@@ -339,7 +393,7 @@ function row(label, value) {
     </tr>`;
 }
 
-function buildEmailHtml(formType, body) {
+function buildEmailHtml(formType, body, meta) {
   const title = {
     quote: 'FREIGHT QUOTE REQUEST',
     apply: 'DRIVER APPLICATION',
@@ -387,9 +441,16 @@ function buildEmailHtml(formType, body) {
           <div style="font-family:'Oswald',Arial,sans-serif;font-size:22px;letter-spacing:0.06em;font-weight:700;color:#111;">${title}</div>
         </div>
         <table style="width:100%;border-collapse:collapse;padding:0 8px;">${rows}</table>
-        <div style="background:#fafafa;border-top:1px solid #eee;padding:14px 24px;font-family:'Courier New',monospace;font-size:11px;color:#666;">
-          Submitted: ${new Date().toISOString()}<br>
-          Page: <a href="https://www.simonexpress.com/" style="color:#D71920;">https://www.simonexpress.com/</a>
+        <div style="background:#fafafa;border-top:1px solid #eee;padding:14px 24px;font-family:'Courier New',monospace;font-size:11px;color:#666;line-height:1.7;">
+          <div style="font-weight:bold;color:#111;margin-bottom:6px;letter-spacing:0.1em;">VISITOR INFO</div>
+          IP: ${meta ? meta.ip : 'n/a'}<br>
+          Location: ${meta ? meta.location : 'n/a'}${meta && meta.mapLink ? ' (<a href="' + meta.mapLink + '" style="color:#D71920;">map</a>)' : ''}<br>
+          Timezone: ${meta ? meta.timezone : 'n/a'}<br>
+          Device: ${meta ? meta.device : 'n/a'} &middot; ${meta ? meta.os : 'n/a'} &middot; ${meta ? meta.browser : 'n/a'}<br>
+          <div style="color:#999;font-size:10px;margin-top:6px;border-top:1px solid #eee;padding-top:6px;">
+            Submitted: ${new Date().toISOString()}<br>
+            Page: <a href="https://www.simonexpress.com/" style="color:#D71920;">https://www.simonexpress.com/</a>
+          </div>
         </div>
       </div>
     </div>
