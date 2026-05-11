@@ -87,7 +87,31 @@
   // ===== FORMS =====
   // Submits to /api/submit-form (Vercel serverless function);
   // falls back to mailto: if the API isn't reachable.
+  // Injects honeypot + timestamp fields into every form on the page.
+  // Real users never see them. Bots fill the honeypot (they fill every input),
+  // and bots without JS execution leave the timestamp empty/stale. Server
+  // (api/submit-form.js) checks both and silently rejects matches.
+  function injectBotDefense() {
+    var now = String(Date.now());
+    document.querySelectorAll('form[data-simon-form]').forEach(function (form) {
+      if (form.querySelector('input[name="website"][data-bot-defense]')) return;
+      var wrap = document.createElement('div');
+      wrap.setAttribute('aria-hidden', 'true');
+      wrap.style.cssText = 'position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;';
+      wrap.innerHTML =
+        '<label for="hp-' + Math.random().toString(36).slice(2, 8) + '">Leave blank</label>' +
+        '<input type="text" name="website" tabindex="-1" autocomplete="off" value="" data-bot-defense />';
+      form.appendChild(wrap);
+      var ts = document.createElement('input');
+      ts.type = 'hidden';
+      ts.name = '_t';
+      ts.value = now;
+      ts.setAttribute('data-bot-defense', '');
+      form.appendChild(ts);
+    });
+  }
   function initForms() {
+    injectBotDefense();
     document.querySelectorAll('form[data-simon-form]').forEach(function (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
