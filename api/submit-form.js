@@ -418,6 +418,7 @@ function buildEmailHtml(formType, body, meta) {
       row('Last Name', body.lastName) +
       row('Email', body.email) +
       row('Phone', body.phone) +
+      row('SMS Consent', body.smsConsent === 'yes' ? 'YES — opted in to SMS at submission' : 'No') +
       row('Location', body.location) +
       row('CDL-A', body.cdla) +
       row('Years Driving', body.yearsDriving) +
