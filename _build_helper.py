@@ -54,6 +54,10 @@ BASE_SCHEMA = '''
       "image": "https://www.simonexpress.com/assets/truck-arch.jpg",
       "email": "info@simonexpress.com",
       "telephone": "+1-801-260-7010",
+      "sameAs": [
+        "https://www.facebook.com/SimonExpressUT/",
+        "https://www.carriersource.io/carriers/simon-express-llc-3001453"
+      ],
       "areaServed": [
         { "@type": "Country", "name": "United States" },
         { "@type": "AdministrativeArea", "name": "Continental United States (48 states)" }
@@ -124,6 +128,9 @@ BASE_SCHEMA = '''
       "image": "https://www.simonexpress.com/assets/truck-arch.jpg",
       "telephone": "+1-801-260-7010",
       "email": "info@simonexpress.com",
+      "sameAs": [
+        "https://www.facebook.com/SimonExpressUT/"
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Salt Lake City",
@@ -202,6 +209,9 @@ PAGE_FOOT = '''
 '''
 
 def render(out_filename, title, description, canonical, body, extra_schema="", og_title=None, noindex=False):
+    # Vercel cleanUrls serves pages without .html — canonicals must match
+    if canonical.endswith(".html"):
+        canonical = canonical[:-5]
     head = HEAD_TEMPLATE.format(
         title=title,
         description=description,
