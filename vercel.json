@@ -79,6 +79,11 @@
       "source": "/employment",
       "destination": "/careers",
       "permanent": true
+    },
+    {
+      "source": "/quick",
+      "destination": "https://kpi.simonexpress.com/apply?type=quick",
+      "permanent": false
     }
   ],
   "rewrites": [
