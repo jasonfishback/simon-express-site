@@ -82,7 +82,12 @@
     },
     {
       "source": "/quick",
-      "destination": "https://kpi.simonexpress.com/apply?type=quick",
+      "destination": "https://kpi.simonexpress.com/quick",
+      "permanent": false
+    },
+    {
+      "source": "/apply",
+      "destination": "https://kpi.simonexpress.com/quick",
       "permanent": false
     }
   ],
